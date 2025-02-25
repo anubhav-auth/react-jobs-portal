@@ -13,11 +13,9 @@ const JobListing = () => {
           Browse Jobs
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <ul>
             {recentJobs.map((job) => (
               <JobCard key={job.id} job={job}/>
             ))}
-          </ul>
         </div>
       </div>
     </section>
