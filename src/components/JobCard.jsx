@@ -1,6 +1,14 @@
 import React from 'react'
+import { useState } from 'react'
 
-const JobCard = ({id, job}) => {
+const JobCard = ({job}) => {
+  const [showFullDescription, setShowFullDescription] = useState(false);
+
+  let description = job.description;
+  if(!showFullDescription){
+    description = description.substring(0,90) + "..."
+  }
+
   return (
     <>
             <div className="bg-white rounded-xl shadow-md relative">
@@ -11,8 +19,9 @@ const JobCard = ({id, job}) => {
                 </div>
   
                 <div className="mb-5">
-                 {job.description}
+                 {description}
                  </div>
+                 <button className="text-indigo-500 mb-5 hover:text-indigo-600" onClick={() => setShowFullDescription((prevState) => !prevState)}>{showFullDescription ? "Less" : "More"}</button>
   
                 <h3 className="text-indigo-500 mb-2">{job.salary}</h3>
   
@@ -24,7 +33,7 @@ const JobCard = ({id, job}) => {
                     {job.location}
                   </div>
                   <a
-                    href="job.html"
+                    href={`/job/${job.id}`}
                     className="h-[36px] bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg text-center text-sm"
                   >
                    Read More
