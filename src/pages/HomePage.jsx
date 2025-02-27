@@ -10,7 +10,7 @@ const HomePage = () => {
       values here for these to show up or let it remain empty so that default values can go in */}
       <Hero/>
       <HomeCards/>
-      <JobList/>
+      <JobList isHome={true} />
       <ViewAllJobs/>
       
     </>
