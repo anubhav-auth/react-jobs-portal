@@ -9,11 +9,12 @@ const JobList = ({isHome = false}) => {
     
     const [job, setJobs] = useState([]);
     const [loading, setLoading] = useState(true);
-
+    
     useEffect(() => { 
       const fetchJobs = async () => {
+        const apiUri = isHome ? "http://localhost:5000/jobs?_limit=3" : "http://localhost:5000/jobs"
         try{
-          const res = await fetch("http://localhost:5000/jobs")
+          const res = await fetch(apiUri)
           const data = await res.json();
           setJobs(data)
         }catch(error){
@@ -26,8 +27,6 @@ const JobList = ({isHome = false}) => {
 
       fetchJobs();
     }, []);
-
-    const jobListings = isHome ? job.slice(0,3): job
   
     return (
       <>
@@ -42,7 +41,7 @@ const JobList = ({isHome = false}) => {
                     <Spinner loading={loading}/>
                 ):  (
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    {jobListings.map((job) => (
+                    {job.map((job) => (
                       <JobCard key={job.id} job={job}/>
                     ))}
                   </div>
